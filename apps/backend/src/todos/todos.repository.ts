@@ -22,7 +22,11 @@ export class TodosRepository {
 
   getTodos(categoryId?: number) {
     if (categoryId) {
-      return this.db.select().from(todos).where(eq(todos.categoryId, categoryId)).all();
+      return this.db
+        .select()
+        .from(todos)
+        .where(eq(todos.categoryId, categoryId))
+        .all();
     }
 
     return this.db.select().from(todos).all();

@@ -1,6 +1,6 @@
 import { IsBoolean } from 'class-validator';
 
 export class UpdateTodoDto {
-  @IsBoolean()
+  @IsBoolean({ message: 'completed must be true or false' })
   completed: boolean;
 }

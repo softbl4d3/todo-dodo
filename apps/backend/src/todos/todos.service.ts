@@ -1,5 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CategoriesRepository } from '../categories/categories.repository';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
@@ -15,22 +18,34 @@ export class TodosService {
   ) {}
 
   createTodo(createTodoDto: CreateTodoDto) {
-    const category = this.categoriesRepository.getCategoryById(createTodoDto.categoryId);
+    const category = this.categoriesRepository.getCategoryById(
+      createTodoDto.categoryId,
+    );
 
     if (!category) {
       throw new BadRequestException('Category not found');
     }
 
-    const todosCount = this.todosRepository.countTodosByCategoryId(createTodoDto.categoryId);
+    const todosCount = this.todosRepository.countTodosByCategoryId(
+      createTodoDto.categoryId,
+    );
 
     if (todosCount >= MAX_TODOS_PER_CATEGORY) {
-      throw new BadRequestException('Category already has maximum 5 active todos');
+      throw new BadRequestException('Category cannot have more than 5 tasks');
     }
 
     return this.todosRepository.createTodo(createTodoDto);
   }
 
   getTodos(categoryId?: number) {
+    if (categoryId) {
+      const category = this.categoriesRepository.getCategoryById(categoryId);
+
+      if (!category) {
+        throw new BadRequestException('Category not found');
+      }
+    }
+
     return this.todosRepository.getTodos(categoryId);
   }
 

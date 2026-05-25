@@ -7,6 +7,6 @@ import { CategoriesModule } from '../categories/categories.module';
 @Module({
   imports: [CategoriesModule],
   providers: [TodosService, TodosRepository],
-  controllers: [TodosController]
+  controllers: [TodosController],
 })
 export class TodosModule {}
