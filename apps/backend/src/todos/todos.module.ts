@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { TodosController } from './todos.controller';
+import { TodosRepository } from './todos.repository';
+import { CategoriesModule } from '../categories/categories.module';
 
 @Module({
-  providers: [TodosService],
+  imports: [CategoriesModule],
+  providers: [TodosService, TodosRepository],
   controllers: [TodosController]
 })
 export class TodosModule {}
