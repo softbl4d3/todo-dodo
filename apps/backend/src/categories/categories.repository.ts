@@ -11,7 +11,23 @@ export class CategoriesRepository {
     return this.db.select().from(categories).all();
   }
 
+  createCategory(createCategoryDto: { name: string }) {
+    return this.db
+      .insert(categories)
+      .values({ name: createCategoryDto.name })
+      .returning()
+      .get();
+  }
+
   getCategoryById(id: number) {
     return this.db.select().from(categories).where(eq(categories.id, id)).get();
+  }
+
+  getCategoryByName(name: string) {
+    return this.db
+      .select()
+      .from(categories)
+      .where(eq(categories.name, name))
+      .get();
   }
 }

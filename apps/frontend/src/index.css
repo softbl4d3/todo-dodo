@@ -1,4 +1,73 @@
+@import 'tailwindcss';
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: "Courier New", Courier, monospace;
+  background: #fff;
+  color: #111;
+  line-height: 1.4;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: #fff;
+}
+
+.ui-card {
+  border: 1px solid #111;
+  background: #fff;
+}
+
+.ui-box {
+  border: 1px solid #111;
+  background: #fff;
+}
+
+.ui-button {
+  border: 1px solid #111;
+  background: #fff;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.ui-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ui-input,
+.ui-select {
+  border: 1px solid #111;
+  padding: 4px 6px;
+}
+
+.ui-badge {
+  border: 1px solid #111;
+  padding: 2px 6px;
+}
+
+.ui-list-item {
+  border: 1px solid #111;
+}
+
+.ui-toast {
+  border: 1px solid #111;
+  background: #fff;
 }

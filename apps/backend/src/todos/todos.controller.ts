@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -16,7 +17,7 @@ import { TodosService } from './todos.service';
 
 @Controller('todos')
 export class TodosController {
-  constructor(private readonly todosService: TodosService) { }
+  constructor(private readonly todosService: TodosService) {}
 
   @Post()
   createTodo(@Body() createTodoDto: CreateTodoDto) {
@@ -30,7 +31,7 @@ export class TodosController {
 
   @Patch(':id')
   updateCompleted(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateTodoDto: UpdateTodoDto,
   ) {
     return this.todosService.updateCompleted(id, updateTodoDto);
@@ -38,7 +39,7 @@ export class TodosController {
 
   @Delete(':id')
   @HttpCode(204)
-  deleteTodo(@Param('id') id: number) {
+  deleteTodo(@Param('id', ParseIntPipe) id: number) {
     this.todosService.deleteTodo(id);
   }
 }
