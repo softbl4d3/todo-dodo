@@ -14,4 +14,4 @@ RUN pnpm build
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "pnpm db:push && node dist/main"]
+CMD ["sh", "-c", "pnpm db:migrate && node dist/main"]
