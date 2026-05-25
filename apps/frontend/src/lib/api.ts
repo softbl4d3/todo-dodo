@@ -1,9 +1,18 @@
 import axios, { AxiosError } from 'axios';
 import type { Category, CreateCategoryInput, CreateTodoInput, Todo } from '../types';
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:3000',
-});
+declare global {
+  interface Window {
+    __RUNTIME_CONFIG__?: { API_URL: string };
+  }
+}
+
+const baseURL =
+  window.__RUNTIME_CONFIG__?.API_URL ??
+  import.meta.env.VITE_API_URL ??
+  'http://localhost:3000';
+
+const api = axios.create({ baseURL });
 
 export async function getCategories() {
   const { data } = await api.get<Category[]>('/categories');
